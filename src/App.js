@@ -1,35 +1,26 @@
 import "./App.css";
-import { YOUTUBE_API } from "./API/YOUTUBE_API";
-import { useEffect, useState } from "react";
-import YouTube from "react-youtube";
-import { setSearchInput, getSearchValue } from "./redux/appSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { getVideoList } from "./redux/appSlice";
+import { useSelector} from "react-redux";
+import InputSearch from "./components/InputSearch";
+import PreviewVideoItem from "./components/previewItem/PreviewVideoItem";
 function App() {
-  const [list, setList] = useState([]);
-  const searchValue = useSelector(getSearchValue)
-  console.log(list)
-  const dispatch = useDispatch()
-  const search = async () => {
-    const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchValue}&type=video&key=AIzaSyAm8O8_eJFmFCJkSjuWaLCCOjwDBxd4lmw`
-    ).then((response) => response.json());
+  const videoList = useSelector(getVideoList);
 
-    setList(response.items);
-  };
-  const previewList = list.map((item, index)=>{
-    return <div key={index}>
-      <img src={item.snippet.thumbnails.medium.url}/>
-  <p>{item.snippet.title}</p>
-    </div>
-  })
-  
+
+  const previewList = videoList.map((item, index) => (
+    <PreviewVideoItem
+      key={index}
+      url={item.snippet.thumbnails.medium.url}
+      title={item.snippet.title}
+    />
+  ));
+
   return (
     <div className="App">
-      <YouTube videoId="JViCymB5m2Q" />
-      
-    <input type='text' value={searchValue} onChange={e=>dispatch(setSearchInput(e.target.value))}/>
-    <button onClick={search}>search</button>
-    {list && previewList}
+      {/* <YouTube videoId="JViCymB5m2Q" /> */}
+      <InputSearch />
+
+      {videoList && previewList}
     </div>
   );
 }

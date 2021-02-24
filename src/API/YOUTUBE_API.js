@@ -12,10 +12,12 @@ const instanse = axios.create({
   headers: {},
 });
 export const YOUTUBE_API = {
-  get: (query) =>
-    instanse.get("/search", {
-      params: {
-        q: query,
-      },
-    }),
+  get: async (query) =>{
+    const response = await fetch(
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&maxResults=20&type=video&key=AIzaSyAm8O8_eJFmFCJkSjuWaLCCOjwDBxd4lmw`
+    )
+    return response.json()
+    
+  }
+  
 };
