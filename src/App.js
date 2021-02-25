@@ -1,7 +1,8 @@
 import "./App.css";
 import { getVideoList } from "./redux/appSlice";
 import { useSelector } from "react-redux";
-import InputSearch from "./components/InputSearch";
+import Header from './components/Header/Header'
+import Content from './components/Content/Content'
 import PreviewVideoItem from "./components/previewItem/PreviewVideoItem";
 function App() {
   const videoList = useSelector(getVideoList);
@@ -16,8 +17,9 @@ function App() {
 
   return (
     <div className="App">
-      {/* <YouTube videoId="JViCymB5m2Q" /> */}
-      <InputSearch />
+      
+      <Header/>
+      <Content/>
       <div className="archive">{videoList && previewList}</div>
     </div>
   );
