@@ -1,8 +1,8 @@
 import React from "react";
-
-const PreviewVideoItem = ({url,title}) => {
+import "./style.sass";
+const PreviewVideoItem = ({ url, title }) => {
   return (
-    <div className="videoItem">
+    <div className="article">
       <img src={url} />
       <h3>{title}</h3>
     </div>
