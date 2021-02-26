@@ -4,23 +4,28 @@ export const appSlice = createSlice({
   name: "app",
   initialState: {
     searchInput: "",
-    selectedVideo: "",
-    videoList:[]
+    selectedVideo: null,
+    videoList: [],
   },
   reducers: {
     setSearchInput: (state, action) => {
-        state.searchInput = action.payload
+      state.searchInput = action.payload;
     },
-    setSelectedVideo: (state, action ) => {
-        state.selectedVideo = action.payload
+    setSelectedVideo: (state, action) => {
+      state.selectedVideo = action.payload;
     },
     setVideoList: (state, action) => {
-      state.videoList = action.payload
-    }
+      state.videoList = action.payload;
+    },
   },
 });
 
-export const {setSearchInput, setSelectedVideo, setVideoList} = appSlice.actions;
-export const getSearchValue = state => state.app.searchInput
-export const getVideoList  = state => state.app.videoList
+export const {
+  setSearchInput,
+  setSelectedVideo,
+  setVideoList,
+} = appSlice.actions;
+export const getSearchValue = (state) => state.app.searchInput;
+export const getVideoList = (state) => state.app.videoList;
+export const getSelectedVideo = (state) => state.app.selectedVideo;
 export default appSlice.reducer;
